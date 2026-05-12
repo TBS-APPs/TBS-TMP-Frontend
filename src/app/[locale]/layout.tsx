@@ -1,4 +1,3 @@
-import { Roboto } from "next/font/google";
 import "../globals.css";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
@@ -8,12 +7,12 @@ import { getLangDir } from "rtl-detect";
 import { DialogProvider } from "@/core/components/UI/dialog/dialog-context";
 import { SnackbarProvider } from "@/core/components/UI/snackbar/snack-bar-context";
 import { ReactNode } from "react";
+import { DirectionProvider } from "@/components/ui/direction";
+import { Noto_Sans_Arabic } from "next/font/google";
 
-const roboto = Roboto({
-  weight: ["300", "400", "500", "700"],
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-roboto",
+const fontSans = Noto_Sans_Arabic({
+  subsets: ["arabic"],
+  variable: "--font-sans",
 });
 
 export async function generateMetadata({
@@ -56,19 +55,21 @@ export default async function RootLayout({
     <html
       lang={locale}
       dir={direction}
-      className={roboto.variable}
+      className={fontSans.variable}
       suppressHydrationWarning
     >
       <body>
-        <NextIntlClientProvider>
-          <DialogProvider>
-            <SnackbarProvider>
-              {children}
-              {/* <CustomSnackbar /> */}
-            </SnackbarProvider>
-            {/* <DialogSlide /> */}
-          </DialogProvider>
-        </NextIntlClientProvider>
+        <DirectionProvider dir={direction} direction={direction}>
+          <NextIntlClientProvider>
+            <DialogProvider>
+              <SnackbarProvider>
+                {children}
+                {/* <CustomSnackbar /> */}
+              </SnackbarProvider>
+              {/* <DialogSlide /> */}
+            </DialogProvider>
+          </NextIntlClientProvider>
+        </DirectionProvider>
       </body>
     </html>
   );
