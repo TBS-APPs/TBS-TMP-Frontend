@@ -5,7 +5,7 @@ import { NextRequest } from "next/server";
 // Create the next-intl middleware
 const intlMiddleware = createMiddleware(routing);
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const intlResponse = intlMiddleware(request);
 
   /// TODO: Remove the comment from this code when the authentication is done, and modify it to fit the project.
