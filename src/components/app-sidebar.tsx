@@ -22,6 +22,7 @@ import {
 import { SidebarLink } from "./sidebar-link";
 import { SidebarLanguageSwitcher } from "./sidebar-language-switcher";
 import { getLangDir } from "rtl-detect";
+import { ItemHeader } from "./ui/item";
 
 interface AppSidebarGroups {
   label: string;
@@ -35,7 +36,7 @@ interface AppSidebarItem {
 }
 
 export async function AppSidebar({ locale }: { locale: string }) {
-  const t = await getTranslations("Sidebar");
+  const t = await getTranslations();
 
   const groups: AppSidebarGroups[] = [
     {
@@ -48,13 +49,27 @@ export async function AppSidebar({ locale }: { locale: string }) {
         },
       ],
     },
+    {
+      label: t("modules"),
+      items: [
+        {
+          label: t("addModule"),
+          icon: <Plus size={16} />,
+          href: "/modules/add",
+        },
+      ],
+    },
   ];
 
   const direction = getLangDir(locale);
 
   return (
     <Sidebar dir={direction} side={direction === "rtl" ? "right" : "left"}>
-      <SidebarHeader></SidebarHeader>
+      <SidebarHeader color="primary">
+        <ItemHeader>
+            {t("appName")}
+        </ItemHeader>
+      </SidebarHeader>
       <SidebarContent>
         {groups.map((group, index) => (
           <Collapsible key={index} defaultOpen className="group/collapsible">

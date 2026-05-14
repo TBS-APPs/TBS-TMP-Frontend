@@ -21,7 +21,7 @@ export function SidebarLanguageSwitcher() {
   const locale = useLocale();
   const pathname = usePathname();
   const router = useRouter();
-  const t = useTranslations("Sidebar");
+  const t = useTranslations();
 
   return (
     <SidebarGroup className="p-0">

@@ -1,9 +1,9 @@
 {
   "appName": "App Name",
   "okay": "Okay",
-  "Sidebar": {
-    "companies": "Companies",
-    "addCompany": "Add Company",
-    "language": "Language"
-  }
+  "companies": "Companies",
+  "addCompany": "Add Company",
+  "language": "Language",
+  "modules": "Modules",
+  "addModule": "Add Module"
 }
