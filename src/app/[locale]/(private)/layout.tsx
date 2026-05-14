@@ -25,7 +25,6 @@ export default async function PrivateLayout({
             <PrivateHeaderBreadcrumb />
           </div>
         </header>
-
         <div className="flex-1 p-4">{children}</div>
       </SidebarInset>
     </SidebarProvider>

@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronDown, Home, Plus, type LucideIcon } from "lucide-react";
+import { ChevronDown, Eye, Home, Plus, type LucideIcon } from "lucide-react";
 import { usePathname } from "@/core/i18n/navigation";
 import {
   Collapsible,
@@ -17,11 +17,12 @@ import {
 } from "@/components/ui/sidebar";
 import { SidebarLink } from "@/components/sidebar-link";
 
-export type SidebarNavIconName = "plus";
+export type SidebarNavIconName = "plus" | "eye";
 
 const ICONS: Record<SidebarNavIconName, LucideIcon> = {
-  plus: Plus,
-};
+    plus: Plus,
+    eye: Eye,
+  };
 
 export interface SidebarNavGroupDef {
   label: string;

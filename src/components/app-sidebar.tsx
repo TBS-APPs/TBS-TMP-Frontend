@@ -27,6 +27,11 @@ export async function AppSidebar({ locale }: { locale: string }) {
       label: t("companies"),
       items: [
         {
+          label: t("companies"),
+          href: "/companies/all",
+          icon: "eye",
+        },
+        {
           label: t("addCompany"),
           href: "/companies/add",
           icon: "plus",
