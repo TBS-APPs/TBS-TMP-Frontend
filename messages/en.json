@@ -7,5 +7,7 @@
   "addCompany": "Add Company",
   "language": "Language",
   "modules": "Modules",
-  "addModule": "Add Module"
+  "addModule": "Add Module",
+  "somethingWrongTryAgain": "Something went wrong. Please try again.",
+  "timeOutFailure": "Time out failure. Please try again."
 }
