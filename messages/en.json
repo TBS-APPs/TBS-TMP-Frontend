@@ -1,6 +1,8 @@
 {
   "appName": "App Name",
   "okay": "Okay",
+  "home": "Home",
+  "account": "Account",
   "companies": "Companies",
   "addCompany": "Add Company",
   "language": "Language",

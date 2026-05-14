@@ -2,9 +2,6 @@ import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarHeader,
   SidebarSeparator,
   SidebarMenu,
@@ -13,39 +10,26 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar";
 import { getTranslations } from "next-intl/server";
-import { ChevronDown, Plus, User2 } from "lucide-react";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "./ui/collapsible";
-import { SidebarLink } from "./sidebar-link";
+import { User2 } from "lucide-react";
 import { SidebarLanguageSwitcher } from "./sidebar-language-switcher";
 import { getLangDir } from "rtl-detect";
-import { ItemHeader } from "./ui/item";
-
-interface AppSidebarGroups {
-  label: string;
-  items: AppSidebarItem[];
-}
-
-interface AppSidebarItem {
-  label: string;
-  icon: React.ReactNode;
-  href: string;
-}
+import {
+  SidebarNavGroups,
+  type SidebarNavGroupDef,
+} from "./sidebar-nav-groups";
+import { Separator } from "./ui/separator";
 
 export async function AppSidebar({ locale }: { locale: string }) {
   const t = await getTranslations();
 
-  const groups: AppSidebarGroups[] = [
+  const groups: SidebarNavGroupDef[] = [
     {
       label: t("companies"),
       items: [
         {
           label: t("addCompany"),
-          icon: <Plus size={16} />,
           href: "/companies/add",
+          icon: "plus",
         },
       ],
     },
@@ -54,8 +38,8 @@ export async function AppSidebar({ locale }: { locale: string }) {
       items: [
         {
           label: t("addModule"),
-          icon: <Plus size={16} />,
           href: "/modules/add",
+          icon: "plus",
         },
       ],
     },
@@ -65,41 +49,14 @@ export async function AppSidebar({ locale }: { locale: string }) {
 
   return (
     <Sidebar dir={direction} side={direction === "rtl" ? "right" : "left"}>
-      <SidebarHeader color="primary">
-        <ItemHeader>
-            {t("appName")}
-        </ItemHeader>
+      <SidebarHeader className="bg-sidebar-primary">
+        <h1 className="scroll-m-20 text-2l font-bold tracking-tight text-balance text-sidebar-primary-foreground">
+          {t("appName")}
+        </h1>
       </SidebarHeader>
+      <Separator />
       <SidebarContent>
-        {groups.map((group, index) => (
-          <Collapsible key={index} defaultOpen className="group/collapsible">
-            <SidebarGroup>
-              <SidebarGroupLabel asChild>
-                <CollapsibleTrigger>
-                  {group.label}
-                  <ChevronDown className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180" />
-                </CollapsibleTrigger>
-              </SidebarGroupLabel>
-              <CollapsibleContent>
-                <SidebarGroupContent>
-                  {group.items.map((item, index) => (
-                    <SidebarMenu key={index}>
-                      <SidebarMenuItem>
-                        <SidebarMenuButton asChild>
-                          <SidebarLink
-                            href={item.href}
-                            icon={item.icon}
-                            label={item.label}
-                          />
-                        </SidebarMenuButton>
-                      </SidebarMenuItem>
-                    </SidebarMenu>
-                  ))}
-                </SidebarGroupContent>
-              </CollapsibleContent>
-            </SidebarGroup>
-          </Collapsible>
-        ))}
+        <SidebarNavGroups homeLabel={t("home")} groups={groups} />
       </SidebarContent>
       <SidebarFooter>
         <SidebarLanguageSwitcher />
@@ -107,7 +64,7 @@ export async function AppSidebar({ locale }: { locale: string }) {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton>
-              <User2 /> Username
+              <User2 /> {t("account")}
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
