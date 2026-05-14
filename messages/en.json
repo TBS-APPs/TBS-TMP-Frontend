@@ -1,4 +1,11 @@
 {
   "appName": "App Name",
-  "okay": "Okay"
+  "okay": "Okay",
+  "home": "Home",
+  "account": "Account",
+  "companies": "Companies",
+  "addCompany": "Add Company",
+  "language": "Language",
+  "modules": "Modules",
+  "addModule": "Add Module"
 }

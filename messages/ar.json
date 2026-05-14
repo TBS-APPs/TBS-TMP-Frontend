@@ -1,4 +1,11 @@
 {
   "appName": "اسم التطبيق",
-  "okay": "حسناً"
+  "okay": "حسناً",
+  "home": "الرئيسية",
+  "account": "الحساب",
+  "companies": "الشركات",
+  "addCompany": "إضافة شركة",
+  "language": "اللغة",
+  "modules": "الموديولات",
+  "addModule": "إضافة موديول"
 }
