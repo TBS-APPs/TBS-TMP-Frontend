@@ -42,6 +42,11 @@ export async function AppSidebar({ locale }: { locale: string }) {
       label: t("modules"),
       items: [
         {
+          label: t("modules"),
+          href: "/modules/all",
+          icon: "eye",
+        },
+        {
           label: t("addModule"),
           href: "/modules/add",
           icon: "plus",
