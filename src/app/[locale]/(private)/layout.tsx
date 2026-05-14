@@ -1,6 +1,9 @@
 import { AppSidebar } from "@/components/app-sidebar";
-import { Separator } from "@/components/ui/separator";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import {
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger,
+} from "@/components/ui/sidebar";
 import { ReactNode } from "react";
 
 export default async function PrivateLayout({
@@ -14,13 +17,13 @@ export default async function PrivateLayout({
   return (
     <SidebarProvider>
       <AppSidebar locale={locale} />
-      <main>
-        <div>
+      <SidebarInset className="flex min-h-svh flex-col">
+        <header className="flex min-h-14 shrink-0 items-center gap-2 border-b border-border p-2">
           <SidebarTrigger />
-        </div>
+        </header>
 
-        <div className="p-4">{children}</div>
-      </main>
+        <div className="flex-1 p-4">{children}</div>
+      </SidebarInset>
     </SidebarProvider>
   );
 }

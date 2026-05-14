@@ -49,7 +49,7 @@ export async function AppSidebar({ locale }: { locale: string }) {
 
   return (
     <Sidebar dir={direction} side={direction === "rtl" ? "right" : "left"}>
-      <SidebarHeader className="bg-sidebar-primary">
+      <SidebarHeader className="min-h-14 justify-center bg-sidebar-primary">
         <h1 className="scroll-m-20 text-2l font-bold tracking-tight text-balance text-sidebar-primary-foreground">
           {t("appName")}
         </h1>
