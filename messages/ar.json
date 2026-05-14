@@ -7,5 +7,7 @@
   "addCompany": "إضافة شركة",
   "language": "اللغة",
   "modules": "الموديولات",
-  "addModule": "إضافة موديول"
+  "addModule": "إضافة موديول",
+  "somethingWrongTryAgain": "هناك خطأ ما. يرجى المحاولة مرة أخرى.",
+  "timeOutFailure": "فشل الوقت. يرجى المحاولة مرة أخرى."
 }

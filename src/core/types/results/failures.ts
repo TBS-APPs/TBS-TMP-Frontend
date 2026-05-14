@@ -18,7 +18,6 @@ export type GenericFailure = {
 export function getFailure(
   t: (key: string) => string,
   isOk: boolean,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   responseData: any
 ): AppFailure | null {
   if (responseData.message && responseData.status !== "success") {
