@@ -1,4 +1,8 @@
 {
   "appName": "اسم التطبيق",
-  "okay": "حسناً"
+  "okay": "حسناً",
+  "Sidebar": {
+    "companies": "الشركات",
+    "addCompany": "إضافة شركة"
+  }
 }

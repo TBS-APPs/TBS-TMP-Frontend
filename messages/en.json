@@ -1,4 +1,8 @@
 {
   "appName": "App Name",
-  "okay": "Okay"
+  "okay": "Okay",
+  "Sidebar": {
+    "companies": "Companies",
+    "addCompany": "Add Company"
+  }
 }
