@@ -6,6 +6,7 @@ import {
   SidebarGroupContent,
   SidebarGroupLabel,
   SidebarHeader,
+  SidebarSeparator,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
@@ -18,8 +19,9 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "./ui/collapsible";
-import { Link } from "@/core/i18n/navigation";
 import { SidebarLink } from "./sidebar-link";
+import { SidebarLanguageSwitcher } from "./sidebar-language-switcher";
+import { getLangDir } from "rtl-detect";
 
 interface AppSidebarGroups {
   label: string;
@@ -32,20 +34,26 @@ interface AppSidebarItem {
   href: string;
 }
 
-export async function AppSidebar() {
+export async function AppSidebar({ locale }: { locale: string }) {
   const t = await getTranslations("Sidebar");
 
   const groups: AppSidebarGroups[] = [
     {
       label: t("companies"),
       items: [
-        { label: t("addCompany"), icon: <Plus size={16} />, href: "/companies/add" },
+        {
+          label: t("addCompany"),
+          icon: <Plus size={16} />,
+          href: "/companies/add",
+        },
       ],
     },
   ];
 
+  const direction = getLangDir(locale);
+
   return (
-    <Sidebar>
+    <Sidebar dir={direction} side={direction === "rtl" ? "right" : "left"}>
       <SidebarHeader></SidebarHeader>
       <SidebarContent>
         {groups.map((group, index) => (
@@ -72,7 +80,6 @@ export async function AppSidebar() {
                       </SidebarMenuItem>
                     </SidebarMenu>
                   ))}
-                  
                 </SidebarGroupContent>
               </CollapsibleContent>
             </SidebarGroup>
@@ -80,6 +87,8 @@ export async function AppSidebar() {
         ))}
       </SidebarContent>
       <SidebarFooter>
+        <SidebarLanguageSwitcher />
+        <SidebarSeparator className="my-1" />
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton>

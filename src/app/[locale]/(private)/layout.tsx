@@ -9,9 +9,10 @@ export default async function PrivateLayout({
   children: ReactNode;
   params: Promise<{ locale: string }>;
 }>) {
+  const { locale } = await params;
   return (
     <SidebarProvider>
-      <AppSidebar />
+      <AppSidebar locale={locale} />
       <main>
         <SidebarTrigger />
         {children}
