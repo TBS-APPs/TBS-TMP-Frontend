@@ -7,7 +7,30 @@
   "addCompany": "إضافة شركة",
   "language": "اللغة",
   "modules": "الموديولات",
+  "id": "المعرّف",
+  "name": "الاسم",
   "addModule": "إضافة موديول",
   "somethingWrongTryAgain": "هناك خطأ ما. يرجى المحاولة مرة أخرى.",
-  "timeOutFailure": "فشل الوقت. يرجى المحاولة مرة أخرى."
+  "timeOutFailure": "فشل الوقت. يرجى المحاولة مرة أخرى.",
+  "actions": "الإجراءات",
+  "edit": "تعديل",
+  "delete": "حذف",
+  "previous": "السابق",
+  "next": "التالي",
+  "search": "بحث",
+  "of": "من",
+  "rowsSelected": "سطر محدد",
+  "dataTable": {
+    "rowsSelectedSummary": "{selected} من {total} سطر محدد",
+    "rowsPerPage": "عدد الصفوف في الصفحة",
+    "pageOf": "صفحة {current} من {total}",
+    "goToFirstPage": "الانتقال إلى الصفحة الأولى",
+    "goToPreviousPage": "الصفحة السابقة",
+    "goToNextPage": "الصفحة التالية",
+    "goToLastPage": "الانتقال إلى الصفحة الأخيرة",
+    "sortAsc": "تصاعدي",
+    "sortDesc": "تنازلي",
+    "hideColumn": "إخفاء",
+    "columns": "الأعمدة"
+  }
 }
