@@ -24,7 +24,12 @@
   "addModuleDescription": "Add a new module to your application.",
   "moduleName": "Module Name",
   "moduleAddedSuccessfully": "Module added successfully.",
+  "moduleDeletedSuccessfully": "Module deleted successfully.",
   "reset": "Reset",
+  "cancel": "Cancel",
+  "yes": "Yes",
+  "areYouSureYouWantToDeleteThisModule": "Are you sure you want to delete this module?",
+  "areYouSure": "Are you sure?",
   "submit": "Submit",
   "dataTable": {
     "rowsSelectedSummary": "{selected} of {total} row(s) selected.",

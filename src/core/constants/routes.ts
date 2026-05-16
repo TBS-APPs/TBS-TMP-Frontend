@@ -5,9 +5,11 @@ export const routes = {
   companies: {
     all: "/companies/all",
     add: "/companies/add",
+    edit: (id: string) => `/companies/edit/${id}`,
   },
   modules: {
     all: "/modules/all",
     add: "/modules/add",
+    edit: (id: string) => `/modules/edit/${id}`,
   },
 } as const;

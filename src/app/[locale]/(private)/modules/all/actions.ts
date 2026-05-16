@@ -1,30 +1,25 @@
 "use server";
 
 import { Module, moduleRepo } from "@/repositories/module";
-import { AddModuleFormValues } from "./add-module-form-schema";
 import { isFailure } from "@/core/types/results";
 import { getTranslations } from "next-intl/server";
 import { moduleEndpoint } from "@/core/constants/endpoints";
 import { updateTag } from "next/cache";
-import { AddActionResult } from "@/core/types/add-action-result";
+import { DeleteActionResult } from "@/core/types/add-action-result";
 
-export async function addModule(
-  values: AddModuleFormValues,
-): Promise<AddActionResult<unknown>> {
+export async function deleteModule(
+  id: string,
+): Promise<DeleteActionResult<unknown>> {
   const t = await getTranslations();
-  const module: Module = {
-    name: values.name,
-  };
-  const result = await moduleRepo.addModule(module);
+  const result = await moduleRepo.deleteModule(id);
 
   if (isFailure(result)) {
     return { success: false, message: result.failure.message };
   } else {
     updateTag(moduleEndpoint);
-    // revalidateTag(moduleEndpoint, { expire: 60 });
     return {
       success: true,
-      message: t("moduleAddedSuccessfully"),
+      message: t("moduleDeletedSuccessfully"),
       data: result.data?.data,
     };
   }
