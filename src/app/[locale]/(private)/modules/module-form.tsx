@@ -1,7 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { createAddModuleFormSchema } from "./add-module-form-schema";
+import { createModuleFormSchema } from "./module-form-schema";
 import { useForm } from "@tanstack/react-form";
 import { Field, FieldGroup } from "@/components/ui/field";
 import { Button } from "@/components/ui/button";
@@ -14,29 +15,38 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { TanStackFormTextField } from "@/components/form";
-import { addModule } from "./actions";
+import { addModule, updateModule } from "./actions";
 import { toast } from "sonner";
 import { useRouter } from "@/core/i18n/navigation";
 import { routes } from "@/core/constants/routes";
 import { Spinner } from "@/components/ui/spinner";
+import { Module } from "@/repositories/module";
+import { TrashIcon } from "lucide-react";
+import { DeleteModuleDialog } from "./all/components/delete-alert";
 
-type AddModuleFormValues = {
+type ModuleFormValues = {
   name: string;
 };
 
-export function AddModuleForm() {
+type Props = {
+  module?: Module;
+};
+
+export function ModuleForm({ module }: Props) {
   const t = useTranslations();
   const router = useRouter();
+  const idEditing = module != null && module != undefined;
+  const [deleteOpen, setDeleteOpen] = useState(false);
   const form = useForm({
     defaultValues: {
-      name: "",
+      name: module?.name ?? "",
     },
     validators: {
-      onSubmit: createAddModuleFormSchema(t),
+      onSubmit: createModuleFormSchema(t),
     },
 
     onSubmit: async ({ value }) => {
-      const result = await addModule(value as AddModuleFormValues);
+      const result = idEditing ? await updateModule(module?.id?.toString() ?? "", value as ModuleFormValues) : await addModule(value as ModuleFormValues);
       if (result.success) {
         router.push(routes.modules.all);
         toast.success(result.message);
@@ -53,9 +63,36 @@ export function AddModuleForm() {
 
   return (
     <Card className="w-full sm:max-w-md">
-      <CardHeader>
-        <CardTitle>{t("addModule")}</CardTitle>
-        <CardDescription>{t("addModuleDescription")}</CardDescription>
+      <CardHeader className="flex flex-row items-start justify-between gap-4 space-y-0">
+        <div className="space-y-1.5">
+          <CardTitle>{idEditing ? t("editModule") : t("addModule")}</CardTitle>
+          <CardDescription>
+            {idEditing ? t("editModuleDescription") : t("addModuleDescription")}
+          </CardDescription>
+        </div>
+        {idEditing && module?.id != null && (
+          <>
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              className="text-destructive hover:bg-destructive/10 hover:text-destructive shrink-0"
+              aria-label={t("delete")}
+              onClick={() => setDeleteOpen(true)}
+            >
+              <TrashIcon className="size-4" />
+            </Button>
+            <DeleteModuleDialog
+              id={String(module.id)}
+              open={deleteOpen}
+              onOpenChange={setDeleteOpen}
+              onDeleted={() => {
+                router.push(routes.modules.all);
+                toast.success(t("moduleDeletedSuccessfully"));
+              }}
+            />
+          </>
+        )}
       </CardHeader>
       <CardContent>
         <form id="add-module-form" onSubmit={handleSubmit}>
@@ -87,7 +124,7 @@ export function AddModuleForm() {
                 form="add-module-form"
                 disabled={isSubmitting}
               >
-                {isSubmitting ? <Spinner /> : t("submit")}
+                {isSubmitting ? <Spinner /> : idEditing ? t("save") : t("submit")}
               </Button>
             </Field>
           )}
