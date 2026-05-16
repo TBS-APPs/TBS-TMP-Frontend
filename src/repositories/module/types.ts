@@ -1,4 +1,4 @@
 export interface Module {
-  id: number;
+  id?: number;
   name: string;
 }

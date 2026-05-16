@@ -9,6 +9,7 @@ import { SnackbarProvider } from "@/core/components/UI/snackbar/snack-bar-contex
 import { ReactNode } from "react";
 import { DirectionProvider } from "@/components/ui/direction";
 import { Noto_Sans_Arabic } from "next/font/google";
+import { Toaster } from "@/components/ui/sonner";
 
 const fontSans = Noto_Sans_Arabic({
   subsets: ["arabic"],
@@ -62,10 +63,11 @@ export default async function RootLayout({
         <DirectionProvider dir={direction} direction={direction}>
           <NextIntlClientProvider>
             <DialogProvider>
-              <SnackbarProvider>
-                {children}
-                {/* <CustomSnackbar /> */}
-              </SnackbarProvider>
+              {/* <SnackbarProvider> */}
+              {children}
+              {/* <CustomSnackbar /> */}
+              {/* </SnackbarProvider> */}
+              <Toaster />
               {/* <DialogSlide /> */}
             </DialogProvider>
           </NextIntlClientProvider>
