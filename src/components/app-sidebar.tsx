@@ -18,6 +18,7 @@ import {
   type SidebarNavGroupDef,
 } from "./sidebar-nav-groups";
 import { Separator } from "./ui/separator";
+import { routes } from "@/core/constants/routes";
 
 export async function AppSidebar({ locale }: { locale: string }) {
   const t = await getTranslations();
@@ -28,12 +29,12 @@ export async function AppSidebar({ locale }: { locale: string }) {
       items: [
         {
           label: t("companies"),
-          href: "/companies/all",
+          href: routes.companies.all,
           icon: "eye",
         },
         {
           label: t("addCompany"),
-          href: "/companies/add",
+          href: routes.companies.add,
           icon: "plus",
         },
       ],
@@ -43,12 +44,12 @@ export async function AppSidebar({ locale }: { locale: string }) {
       items: [
         {
           label: t("modules"),
-          href: "/modules/all",
+          href: routes.modules.all,
           icon: "eye",
         },
         {
           label: t("addModule"),
-          href: "/modules/add",
+          href: routes.modules.add,
           icon: "plus",
         },
       ],

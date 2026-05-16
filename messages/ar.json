@@ -10,6 +10,7 @@
   "id": "المعرّف",
   "name": "الاسم",
   "addModule": "إضافة موديول",
+  "moduleAddedSuccessfully": "تم إضافة الموديول بنجاح.",
   "somethingWrongTryAgain": "هناك خطأ ما. يرجى المحاولة مرة أخرى.",
   "timeOutFailure": "فشل الوقت. يرجى المحاولة مرة أخرى.",
   "actions": "الإجراءات",
@@ -20,6 +21,12 @@
   "search": "بحث",
   "of": "من",
   "rowsSelected": "سطر محدد",
+  "nameMinLength": "يجب أن يكون اسم الموديول 3 أحرف على الأقل.",
+  "addModuleDescription": "إضافة موديول جديد إلى التطبيق.",
+  "moduleName": "اسم الموديول",
+  "reset": "إعادة تعيين",
+  "submit": "إرسال",
+
   "dataTable": {
     "rowsSelectedSummary": "{selected} من {total} سطر محدد",
     "rowsPerPage": "عدد الصفوف في الصفحة",

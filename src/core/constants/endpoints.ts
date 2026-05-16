@@ -1,2 +1,2 @@
 export const getCompaniesEndpoint = "company";
-export const getModulesEndpoint = "module";
+export const moduleEndpoint = "module";

@@ -20,6 +20,12 @@
   "search": "Search",
   "of": "of",
   "rowsSelected": "row(s) selected",
+  "nameMinLength": "Module name must be at least 3 characters.",
+  "addModuleDescription": "Add a new module to your application.",
+  "moduleName": "Module Name",
+  "moduleAddedSuccessfully": "Module added successfully.",
+  "reset": "Reset",
+  "submit": "Submit",
   "dataTable": {
     "rowsSelectedSummary": "{selected} of {total} row(s) selected.",
     "rowsPerPage": "Rows per page",
