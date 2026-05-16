@@ -6,7 +6,9 @@ import { callGet, callPost } from "@/core/services/api-services";
 export class ModuleImpl implements ModuleRepo {
   getModules(): Promise<Result<ResultType<Module[]>>> {
     const endpoint = moduleEndpoint;
-    return callGet<ResultType<Module[]>>(endpoint);
+    return callGet<ResultType<Module[]>>(endpoint, "force-cache", {
+      tags: [endpoint],
+    });
   }
   addModule(module: Module): Promise<Result<ResultType<void>>> {
     const endpoint = moduleEndpoint;

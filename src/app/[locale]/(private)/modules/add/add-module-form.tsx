@@ -18,6 +18,7 @@ import { addModule } from "./actions";
 import { toast } from "sonner";
 import { useRouter } from "@/core/i18n/navigation";
 import { routes } from "@/core/constants/routes";
+import { Spinner } from "@/components/ui/spinner";
 
 type AddModuleFormValues = {
   name: string;
@@ -33,6 +34,7 @@ export function AddModuleForm() {
     validators: {
       onSubmit: createAddModuleFormSchema(t),
     },
+
     onSubmit: async ({ value }) => {
       const result = await addModule(value as AddModuleFormValues);
       if (result.success) {
@@ -69,14 +71,27 @@ export function AddModuleForm() {
         </form>
       </CardContent>
       <CardFooter>
-        <Field orientation="horizontal">
-          <Button type="button" variant="outline" onClick={() => form.reset()}>
-            {t("reset")}
-          </Button>
-          <Button type="submit" form="add-module-form">
-            {t("submit")}
-          </Button>
-        </Field>
+        <form.Subscribe selector={(state) => state.isSubmitting}>
+          {(isSubmitting) => (
+            <Field orientation="horizontal">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => form.reset()}
+                disabled={isSubmitting}
+              >
+                {t("reset")}
+              </Button>
+              <Button
+                type="submit"
+                form="add-module-form"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? <Spinner /> : t("submit")}
+              </Button>
+            </Field>
+          )}
+        </form.Subscribe>
       </CardFooter>
     </Card>
   );

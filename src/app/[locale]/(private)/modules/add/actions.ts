@@ -3,8 +3,9 @@
 import { Module, moduleRepo } from "@/repositories/module";
 import { AddModuleFormValues } from "./add-module-form-schema";
 import { isFailure } from "@/core/types/results";
-import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
+import { moduleEndpoint } from "@/core/constants/endpoints";
+import { updateTag } from "next/cache";
 
 export async function addModule(
   values: AddModuleFormValues,
@@ -18,6 +19,8 @@ export async function addModule(
   if (isFailure(result)) {
     return { success: false, message: result.failure.message };
   } else {
+    updateTag(moduleEndpoint);
+    // revalidateTag(moduleEndpoint, { expire: 60 });
     return {
       success: true,
       message: t("moduleAddedSuccessfully"),

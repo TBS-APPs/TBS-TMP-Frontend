@@ -9,8 +9,17 @@ import { getAccessToken } from "@/core/utils/cookie-service";
 
 const TIMED_OUT_DURATION = 15000;
 
-export async function callGet<T>(endPoint: string): Promise<Result<T>> {
-  return _request<T>({ method: "get", endPoint });
+export async function callGet<T>(
+  endPoint: string,
+  cache?: "force-cache" | "no-store" | "no-cache" | "only-if-cached",
+  next?: { revalidate?: number; tags: string[] },
+): Promise<Result<T>> {
+  return _request<T>({
+    method: "get",
+    endPoint,
+    cache,
+    next,
+  });
 }
 
 export async function callPost<T>(
@@ -42,11 +51,20 @@ async function _request<T>({
   endPoint,
   body,
   customHeaders,
+  cache,
+  next,
 }: {
   method: "get" | "post" | "put" | "delete";
   endPoint: string;
   body?: string | FormData;
   customHeaders?: Record<string, string>;
+  cache?: "force-cache" | "no-store" | "no-cache" | "only-if-cached";
+  next?:
+    | {
+        revalidate?: number;
+        tags: string[];
+      }
+    | undefined;
 }): Promise<Result<T>> {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -67,6 +85,8 @@ async function _request<T>({
       method,
       headers: _getHeaders(locale, isMultipart, token, customHeaders, hasBody),
       signal: AbortSignal.timeout(TIMED_OUT_DURATION),
+      cache: cache,
+      next: next,
     };
 
     if (hasBody && method !== "get" && method !== "delete") {
