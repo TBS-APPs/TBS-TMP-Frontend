@@ -1,7 +1,7 @@
 "use server";
 
 import { Module, moduleRepo } from "@/repositories/module";
-import { AddModuleFormValues } from "./add-module-form-schema";
+import { ModuleFormValues } from "./module-form-schema";
 import { isFailure } from "@/core/types/results";
 import { getTranslations } from "next-intl/server";
 import { moduleEndpoint } from "@/core/constants/endpoints";
@@ -9,7 +9,7 @@ import { updateTag } from "next/cache";
 import { AddActionResult } from "@/core/types/add-action-result";
 
 export async function addModule(
-  values: AddModuleFormValues,
+  values: ModuleFormValues,
 ): Promise<AddActionResult<unknown>> {
   const t = await getTranslations();
   const module: Module = {
@@ -22,6 +22,28 @@ export async function addModule(
   } else {
     updateTag(moduleEndpoint);
     // revalidateTag(moduleEndpoint, { expire: 60 });
+    return {
+      success: true,
+      message: t("moduleAddedSuccessfully"),
+      data: result.data?.data,
+    };
+  }
+}
+
+export async function updateModule(
+  id: string,
+  values: ModuleFormValues,
+): Promise<AddActionResult<unknown>> {
+  const t = await getTranslations();
+  const module: Module = {
+    name: values.name,
+  };
+  const result = await moduleRepo.updateModule(id, module);
+
+  if (isFailure(result)) {
+    return { success: false, message: result.failure.message };
+  } else {
+    updateTag(moduleEndpoint);
     return {
       success: true,
       message: t("moduleAddedSuccessfully"),

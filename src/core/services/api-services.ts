@@ -42,6 +42,13 @@ export async function callPut<T>(
   return _request<T>({ method: "put", endPoint, body });
 }
 
+export async function callPatch<T>(
+  endPoint: string,
+  body: string,
+): Promise<Result<T>> {
+  return _request<T>({ method: "patch", endPoint, body });
+}
+
 export async function callDelete<T>(endPoint: string): Promise<Result<T>> {
   return _request<T>({ method: "delete", endPoint });
 }
@@ -54,7 +61,7 @@ async function _request<T>({
   cache,
   next,
 }: {
-  method: "get" | "post" | "put" | "delete";
+  method: "get" | "post" | "put" | "delete" | "patch";
   endPoint: string;
   body?: string | FormData;
   customHeaders?: Record<string, string>;
@@ -82,7 +89,8 @@ async function _request<T>({
     const hasBody = body !== undefined;
 
     const config: RequestInit = {
-      method,
+      // Fetch/undici: lowercase verbs (e.g. `patch`) can cause 405 or odd proxy behavior; use RFC 9110 casing.
+      method: method.toUpperCase(),
       headers: _getHeaders(locale, isMultipart, token, customHeaders, hasBody),
       signal: AbortSignal.timeout(TIMED_OUT_DURATION),
       cache: cache,
@@ -94,6 +102,10 @@ async function _request<T>({
     }
 
     const response = await fetch(url, config);
+    console.log("url: " + url);
+    console.log("config: " + JSON.stringify(config));
+    // console.log("response: " + await response.json());
+
     let responseData;
     try {
       responseData = await response.json();

@@ -1,5 +1,5 @@
-import { AddModuleForm } from "./add-module-form";
+import { ModuleForm } from "../module-form";
 
 export default function AddModulePage() {
-  return <AddModuleForm />;
+  return <ModuleForm />;
 }
