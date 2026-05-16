@@ -7,7 +7,30 @@
   "addCompany": "Add Company",
   "language": "Language",
   "modules": "Modules",
+  "id": "ID",
+  "name": "Name",
   "addModule": "Add Module",
   "somethingWrongTryAgain": "Something went wrong. Please try again.",
-  "timeOutFailure": "Time out failure. Please try again."
+  "timeOutFailure": "Time out failure. Please try again.",
+  "actions": "Actions",
+  "edit": "Edit",
+  "delete": "Delete",
+  "previous": "Previous",
+  "next": "Next",
+  "search": "Search",
+  "of": "of",
+  "rowsSelected": "row(s) selected",
+  "dataTable": {
+    "rowsSelectedSummary": "{selected} of {total} row(s) selected.",
+    "rowsPerPage": "Rows per page",
+    "pageOf": "Page {current} of {total}",
+    "goToFirstPage": "Go to first page",
+    "goToPreviousPage": "Go to previous page",
+    "goToNextPage": "Go to next page",
+    "goToLastPage": "Go to last page",
+    "sortAsc": "Asc",
+    "sortDesc": "Desc",
+    "hideColumn": "Hide",
+    "columns": "Columns"
+  }
 }
