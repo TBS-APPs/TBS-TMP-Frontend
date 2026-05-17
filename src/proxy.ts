@@ -1,38 +1,71 @@
 import createMiddleware from "next-intl/middleware";
+import { ACCESS_TOKEN_COOKIE } from "./core/constants/auth-cookies";
+import { routes } from "./core/constants/routes";
 import { routing } from "./core/i18n/routing";
-import { NextRequest } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 
-// Create the next-intl middleware
 const intlMiddleware = createMiddleware(routing);
 
-export async function proxy(request: NextRequest) {
-  const intlResponse = intlMiddleware(request);
+const locales = routing.locales;
+const DEFAULT_LOCALE = locales[0] ?? "en";
 
-  /// TODO: Remove the comment from this code when the authentication is done, and modify it to fit the project.
-  //   const localeUrl = request.nextUrl.clone();
-  //   const pathname = localeUrl.pathname;
+function normalizeRestPath(restPath: string): string {
+  const trimmedTrailing = restPath.replace(/\/+$/, "");
+  return trimmedTrailing === "" ? "/" : trimmedTrailing;
+}
 
-  //   const localeMatch = pathname.match(/^\/([^/]+)/);
-  //   const locale = localeMatch ? localeMatch[1] : "en";
+function getLocaleAndRestPath(pathname: string): {
+  locale: string;
+  restPath: string;
+} {
+  let p = pathname.trim();
+  if (!p.startsWith("/")) {
+    p = `/${p}`;
+  }
+  const parts = p.split("/").filter(Boolean);
+  if (
+    parts.length > 0 &&
+    locales.includes(parts[0] as (typeof locales)[number])
+  ) {
+    const locale = parts[0];
+    const sub = parts.slice(1);
+    const restRaw = sub.length === 0 ? "/" : `/${sub.join("/")}`;
+    return { locale, restPath: normalizeRestPath(restRaw) };
+  }
+  const restRaw = parts.length === 0 ? "/" : `/${parts.join("/")}`;
+  return {
+    locale: DEFAULT_LOCALE,
+    restPath: normalizeRestPath(restRaw),
+  };
+}
 
-  //   const token = request.cookies.get("token")?.value;
+function isPublicAuthPath(restPath: string): boolean {
+  return (
+    restPath === routes.auth.login || restPath === routes.auth.register
+  );
+}
 
-  //   if (!pathname.startsWith(`/${locale}/auth`) && !token) {
-  //     const authUrl = request.nextUrl.clone();
-  //     authUrl.pathname = `/${locale}/auth`;
-  //     return NextResponse.redirect(authUrl);
-  //   } else if (pathname.startsWith(`/${locale}/auth`) && token) {
-  //     const homeUrl = request.nextUrl.clone();
-  //     homeUrl.pathname = `/${locale}/`;
-  //     return NextResponse.redirect(homeUrl);
-  //   }
+export function proxy(request: NextRequest) {
+  const hasAuth = Boolean(request.cookies.get(ACCESS_TOKEN_COOKIE)?.value);
 
-  return intlResponse;
+  const { locale, restPath } = getLocaleAndRestPath(request.nextUrl.pathname);
+  const publicAuth = isPublicAuthPath(restPath);
+
+  if (!hasAuth && !publicAuth) {
+    return NextResponse.redirect(
+      new URL(`/${locale}${routes.auth.login}`, request.url),
+    );
+  }
+
+  if (hasAuth && publicAuth) {
+    return NextResponse.redirect(
+      new URL(`/${locale}${routes.home}`, request.url),
+    );
+  }
+
+  return intlMiddleware(request);
 }
 
 export const config = {
-  // Match all pathnames except for
-  // - … if they start with `/api`, `/trpc`, `/_next` or `/_vercel`
-  // - … the ones containing a dot (e.g. `favicon.ico`)
   matcher: "/((?!api|trpc|_next|_vercel|.*\\..*).*)",
 };
