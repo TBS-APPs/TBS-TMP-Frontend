@@ -3,9 +3,10 @@
 import type { User } from "@/repositories/auth/types";
 
 import { cookies } from "next/headers";
-
-const AUTH_USER_COOKIE = "auth_user";
-const ACCESS_TOKEN_COOKIE = "access_token";
+import {
+  ACCESS_TOKEN_COOKIE,
+  AUTH_USER_COOKIE,
+} from "@/core/constants/auth-cookies";
 
 function authCookieOptions() {
   return {
