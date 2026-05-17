@@ -1,9 +1,11 @@
 "use server";
 
-import { getTranslations } from "next-intl/server";
+import { getTranslations, getLocale } from "next-intl/server";
 import type { AddActionResult } from "@/core/types/add-action-result";
 import { isFailure } from "@/core/types/results";
-import { setAccessToken, setAuthUser } from "@/core/utils/cookie-service";
+import { setAccessToken, setAuthUser, clearAuthSession } from "@/core/utils/cookie-service";
+import { redirect } from "@/core/i18n/navigation";
+import { routes } from "@/core/constants/routes";
 import { authRepo } from "@/repositories/auth";
 import type { User } from "@/repositories/auth/types";
 import { createLoginFormSchema } from "./login-schema";
@@ -98,4 +100,10 @@ export async function registerAction(values: {
     message: t("registerSucceeded"),
     data: { user: payload.user },
   };
+}
+
+export async function logoutAction(): Promise<void> {
+  await clearAuthSession();
+  const locale = await getLocale();
+  redirect({ href: routes.auth.login, locale });
 }

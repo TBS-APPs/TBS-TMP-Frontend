@@ -36,6 +36,7 @@ function segmentLabel(
   const prev = index > 0 ? segments[index - 1] : undefined;
   if (segment === "companies") return t("companies");
   if (segment === "modules") return t("modules");
+  if (segment === "account") return t("account");
   if (segment === "add" && prev === "companies") return t("addCompany");
   if (segment === "add" && prev === "modules") return t("addModule");
   return humanizeSlug(segment);

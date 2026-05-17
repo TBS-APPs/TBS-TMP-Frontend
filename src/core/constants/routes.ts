@@ -3,6 +3,7 @@
  */
 export const routes = {
   home: "/",
+  account: "/account",
   auth: {
     login: "/login",
     register: "/register",
