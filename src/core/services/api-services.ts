@@ -148,6 +148,7 @@ function _getHeaders(
   hasBody = true,
 ): Headers {
   const headers = new Headers();
+
   headers.append("Accept-Language", locale);
   headers.append("Accept", "application/json; charset=UTF-8");
 
