@@ -4,13 +4,9 @@ import {
   SidebarFooter,
   SidebarHeader,
   SidebarSeparator,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar";
 import { getTranslations } from "next-intl/server";
-import { User2 } from "lucide-react";
 import { SidebarLanguageSwitcher } from "./sidebar-language-switcher";
 import { getLangDir } from "rtl-detect";
 import {
@@ -18,10 +14,13 @@ import {
   type SidebarNavGroupDef,
 } from "./sidebar-nav-groups";
 import { Separator } from "./ui/separator";
+import { SidebarAccountMenu } from "./sidebar-account-menu";
 import { routes } from "@/core/constants/routes";
+import { getAuthUser } from "@/core/utils/cookie-service";
 
 export async function AppSidebar({ locale }: { locale: string }) {
   const t = await getTranslations();
+  const user = await getAuthUser();
 
   const groups: SidebarNavGroupDef[] = [
     {
@@ -72,13 +71,14 @@ export async function AppSidebar({ locale }: { locale: string }) {
       <SidebarFooter>
         <SidebarLanguageSwitcher />
         <SidebarSeparator className="my-1" />
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton>
-              <User2 /> {t("account")}
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
+        <SidebarAccountMenu
+          locale={locale}
+          user={
+            user
+              ? { name: user.name, email: user.email }
+              : null
+          }
+        />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>

@@ -5,6 +5,7 @@ import type { User } from "@/repositories/auth/types";
 import { cookies } from "next/headers";
 
 const AUTH_USER_COOKIE = "auth_user";
+const ACCESS_TOKEN_COOKIE = "access_token";
 
 function authCookieOptions() {
   return {
@@ -19,19 +20,19 @@ function authCookieOptions() {
 export async function setAccessToken(token: string): Promise<void> {
   const cookieStore = await cookies();
 
-  cookieStore.set("access_token", token, authCookieOptions());
+  cookieStore.set(ACCESS_TOKEN_COOKIE, token, authCookieOptions());
 }
 
 export async function getAccessToken(): Promise<string | null> {
   const cookieStore = await cookies();
 
-  return cookieStore.get("access_token")?.value || null;
+  return cookieStore.get(ACCESS_TOKEN_COOKIE)?.value || null;
 }
 
 export async function clearAccessToken(): Promise<void> {
   const cookieStore = await cookies();
 
-  cookieStore.delete("access_token");
+  cookieStore.delete(ACCESS_TOKEN_COOKIE);
 }
 
 export async function setAuthUser(user: User): Promise<void> {
@@ -70,7 +71,7 @@ export async function getAuthUser(): Promise<User | null> {
 export async function clearAuthSession(): Promise<void> {
   const cookieStore = await cookies();
 
-  cookieStore.delete("access_token");
+  cookieStore.delete(ACCESS_TOKEN_COOKIE);
 
   cookieStore.delete(AUTH_USER_COOKIE);
 }
