@@ -1,9 +1,10 @@
-import { redirect, useRouter } from "@/core/i18n/navigation";
+import { redirect } from "@/core/i18n/navigation";
+import { routes } from "@/core/constants/routes";
 import { getLocale } from "next-intl/server";
 
 export default async function CompaniesPage() {
   const locale = await getLocale();
-  redirect({ href: "/companies/all", locale: locale });
+  redirect({ href: routes.companies.all, locale: locale });
 
   return <></>;
 }

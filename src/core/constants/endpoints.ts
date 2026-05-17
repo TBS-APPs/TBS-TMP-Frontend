@@ -1,4 +1,4 @@
-export const getCompaniesEndpoint = "company";
+export const companyEndpoint = "company";
 export const moduleEndpoint = "module";
 
 export const authEndpoints = {

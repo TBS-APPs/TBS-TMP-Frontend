@@ -38,7 +38,9 @@ function segmentLabel(
   if (segment === "modules") return t("modules");
   if (segment === "account") return t("account");
   if (segment === "add" && prev === "companies") return t("addCompany");
+  if (segment === "edit" && prev === "companies") return t("editCompany");
   if (segment === "add" && prev === "modules") return t("addModule");
+  if (segment === "edit" && prev === "modules") return t("editModule");
   return humanizeSlug(segment);
 }
 
