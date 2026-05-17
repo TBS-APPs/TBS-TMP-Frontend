@@ -1,6 +1,6 @@
 export interface Company {
-  id: number;
+  id?: number;
   name: string;
   alias: string;
-  status: string;
+  status?: string;
 }
