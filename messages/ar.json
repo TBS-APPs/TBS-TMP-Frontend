@@ -89,6 +89,14 @@
   "dynamicsTenantId": "معرّف المستأجر",
   "dynamicsResource": "المورد",
   "dynamicsSettingSavedSuccessfully": "تم حفظ إعدادات Dynamics بنجاح.",
+  "licenses": "التراخيص",
+  "companyLicensesSectionDescription": "التراخيص المخصصة لهذه الشركة.",
+  "noLicensesForCompany": "لا توجد تراخيص لهذه الشركة بعد.",
+  "addLicense": "إضافة ترخيص",
+  "addLicenseComingSoon": "ستتوفر إضافة الترخيص في الخطوة التالية.",
+  "licenseSeatsLimit": "حد المقاعد",
+  "licenseStartDate": "تاريخ البدء",
+  "licenseExpirationDate": "تاريخ الانتهاء",
 
   "dataTable": {
     "rowsSelectedSummary": "{selected} من {total} سطر محدد",

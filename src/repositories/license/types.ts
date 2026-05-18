@@ -1,4 +1,4 @@
-import Module from "module";
+import { Module } from "@/repositories/module/types";
 
 export interface License {
   id: number;
