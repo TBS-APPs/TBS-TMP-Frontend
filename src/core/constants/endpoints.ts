@@ -21,6 +21,16 @@ export const dynamicsSettingsEndpoints = {
   },
 };
 
+export const licenseEndpoints = {
+  baseUrl: "license",
+  company(companyId: string) {
+    return `${this.baseUrl}/company/${companyId}`;
+  },
+  companyLicense(companyId: string, licenseId: string) {
+    return `${this.baseUrl}/company/${companyId}/${licenseId}`;
+  },
+};
+
 export const moduleEndpoint = "module";
 
 export const authEndpoints = {

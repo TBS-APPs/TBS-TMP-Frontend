@@ -1,6 +1,7 @@
 import { companyRepo } from "@/repositories/company";
 import { CompanyForm } from "../../company-form";
 import { DynamicsSettingsForm } from "../../dynamics-settings-form";
+import { CompanyLicensesSection } from "../../company-licenses-section";
 import { isFailure } from "@/core/types/results";
 import { routes } from "@/core/constants/routes";
 import { redirect } from "@/core/i18n/navigation";
@@ -32,6 +33,12 @@ export default async function EditCompanyPage({ params }: Props) {
         <DynamicsSettingsForm
           companyId={company.id}
           dynamicsSettings={company.dynamicsSettings}
+        />
+      )}
+      {company.id != null && (
+        <CompanyLicensesSection
+          companyId={company.id}
+          licenses={company.licenses}
         />
       )}
     </div>
