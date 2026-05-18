@@ -1,11 +1,11 @@
 import { companyRepo } from "@/repositories/company";
-import { CompanyForm } from "../../company-form";
-import { DynamicsSettingsForm } from "../../dynamics-settings-form";
-import { CompanyLicensesSection } from "../../company-licenses-section";
+import { CompanyForm } from "../../_licenses/company-form";
+import { CompanyLicensesSection } from "../../_licenses/company-licenses-section";
 import { isFailure } from "@/core/types/results";
 import { routes } from "@/core/constants/routes";
 import { redirect } from "@/core/i18n/navigation";
 import { getLocale } from "next-intl/server";
+import { DynamicsSettingsForm } from "../../_dynamics-settings/dynamics-settings-form";
 
 type Props = {
   params: Promise<{ id: string }>;
