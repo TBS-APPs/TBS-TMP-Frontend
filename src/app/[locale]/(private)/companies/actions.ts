@@ -4,7 +4,7 @@ import { companyRepo } from "@/repositories/company";
 import { CompanyFormValues } from "./company-form-schema";
 import { isFailure } from "@/core/types/results";
 import { getTranslations } from "next-intl/server";
-import { companyEndpoint } from "@/core/constants/endpoints";
+import { companyEndpoints } from "@/core/constants/endpoints";
 import { updateTag } from "next/cache";
 import { AddActionResult } from "@/core/types/add-action-result";
 
@@ -20,7 +20,7 @@ export async function addCompany(
   if (isFailure(result)) {
     return { success: false, message: result.failure.message };
   }
-  updateTag(companyEndpoint);
+  updateTag(companyEndpoints.baseUrl);
   return {
     success: true,
     message: t("companyAddedSuccessfully"),
@@ -41,7 +41,7 @@ export async function updateCompany(
   if (isFailure(result)) {
     return { success: false, message: result.failure.message };
   }
-  updateTag(companyEndpoint);
+  updateTag(companyEndpoints.baseUrl);
   return {
     success: true,
     message: t("companyUpdatedSuccessfully"),

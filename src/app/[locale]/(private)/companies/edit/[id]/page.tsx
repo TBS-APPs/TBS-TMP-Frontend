@@ -8,7 +8,7 @@ type Props = {
 
 export default async function EditCompanyPage({ params }: Props) {
   const { id } = await params;
-  const companyResult = await companyRepo.getCompany(id);
+  const companyResult = await companyRepo.getCompanyDetail(id);
   if (isFailure(companyResult)) {
     return <div>Error: {companyResult.failure.message}</div>;
   }
