@@ -15,14 +15,14 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { TanStackFormTextField } from "@/components/form";
-import { addCompany, updateCompany } from "./actions";
+import { addCompany, updateCompany } from "../actions";
 import { toast } from "sonner";
 import { useRouter } from "@/core/i18n/navigation";
 import { routes } from "@/core/constants/routes";
 import { Spinner } from "@/components/ui/spinner";
 import { Company } from "@/repositories/company";
 import { TrashIcon } from "lucide-react";
-import { DeleteCompanyDialog } from "./all/components/delete-alert";
+import { DeleteCompanyDialog } from "../all/components/delete-alert";
 
 type Props = {
   company?: Company;
