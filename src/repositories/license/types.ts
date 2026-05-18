@@ -7,3 +7,10 @@ export interface License {
   expirationDate: string;
   module: Module;
 }
+
+export type LicenseByCompanyPayload = {
+  seatsLimit: number;
+  startDate: string;
+  expirationDate: string;
+  moduleId: number;
+};

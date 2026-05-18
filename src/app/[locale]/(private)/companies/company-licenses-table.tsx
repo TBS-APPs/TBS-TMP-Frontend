@@ -6,8 +6,17 @@ import { DataTable } from "@/components/data-table/data-table";
 import { License } from "@/repositories/license/types";
 import { createCompanyLicenseColumns } from "./company-licenses-columns";
 
-export function CompanyLicensesTable({ data }: { data: License[] }) {
+type Props = {
+  data: License[];
+  companyId: number;
+  onEdit: (license: License) => void;
+};
+
+export function CompanyLicensesTable({ data, companyId, onEdit }: Props) {
   const t = useTranslations();
-  const columns = useMemo(() => createCompanyLicenseColumns(t), [t]);
+  const columns = useMemo(
+    () => createCompanyLicenseColumns(t, { companyId, onEdit }),
+    [t, companyId, onEdit],
+  );
   return <DataTable columns={columns} data={data} />;
 }

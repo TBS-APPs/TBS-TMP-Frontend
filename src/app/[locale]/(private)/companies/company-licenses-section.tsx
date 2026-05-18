@@ -1,46 +1,32 @@
-import { getTranslations } from "next-intl/server";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { isFailure } from "@/core/types/results";
+import { moduleRepo } from "@/repositories/module";
 import { License } from "@/repositories/license/types";
-import { CompanyLicensesTable } from "./company-licenses-table";
-import { AddLicenseButton } from "./add-license-button";
+import type { SelectOption } from "@/components/form";
+import { CompanyLicensesSectionClient } from "./company-licenses-section-client";
 
 type Props = {
   companyId: number;
   licenses?: License[];
 };
 
-export async function CompanyLicensesSection({
-  companyId: _companyId,
-  licenses,
-}: Props) {
-  void _companyId;
-  const t = await getTranslations();
-  const items = licenses ?? [];
+export async function CompanyLicensesSection({ companyId, licenses }: Props) {
+  const modulesResult = await moduleRepo.getModules();
+  if (isFailure(modulesResult)) {
+    return <div>Error: {modulesResult.failure.message}</div>;
+  }
+
+  const moduleOptions: SelectOption[] = (modulesResult.data?.data ?? []).map(
+    (module) => ({
+      value: String(module.id),
+      label: module.name,
+    }),
+  );
 
   return (
-    <Card>
-      <CardHeader className="flex flex-row items-start justify-between gap-4 space-y-0">
-        <div className="space-y-1.5">
-          <CardTitle>{t("licenses")}</CardTitle>
-          <CardDescription>{t("companyLicensesSectionDescription")}</CardDescription>
-        </div>
-        <AddLicenseButton />
-      </CardHeader>
-      <CardContent>
-        {items.length === 0 ? (
-          <p className="text-muted-foreground text-sm">
-            {t("noLicensesForCompany")}
-          </p>
-        ) : (
-          <CompanyLicensesTable data={items} />
-        )}
-      </CardContent>
-    </Card>
+    <CompanyLicensesSectionClient
+      companyId={companyId}
+      licenses={licenses ?? []}
+      moduleOptions={moduleOptions}
+    />
   );
 }
