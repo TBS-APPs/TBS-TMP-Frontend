@@ -77,6 +77,18 @@
   "moduleName": "اسم الموديول",
   "reset": "إعادة تعيين",
   "submit": "إرسال",
+  "fieldRequired": "هذا الحقل مطلوب.",
+  "addDynamicsSettings": "إضافة إعدادات Dynamics",
+  "editDynamicsSettings": "تعديل إعدادات Dynamics",
+  "addDynamicsSettingsDescription": "إعداد اتصال Dynamics 365 لهذه الشركة.",
+  "editDynamicsSettingsDescription": "تحديث إعدادات اتصال Dynamics 365 لهذه الشركة.",
+  "dynamicsBaseUrl": "رابط الأساس",
+  "dynamicsTokenUrl": "رابط الرمز",
+  "dynamicsClientId": "معرّف العميل",
+  "dynamicsClientSecret": "سر العميل",
+  "dynamicsTenantId": "معرّف المستأجر",
+  "dynamicsResource": "المورد",
+  "dynamicsSettingSavedSuccessfully": "تم حفظ إعدادات Dynamics بنجاح.",
 
   "dataTable": {
     "rowsSelectedSummary": "{selected} من {total} سطر محدد",

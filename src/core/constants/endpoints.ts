@@ -3,14 +3,21 @@ export const companyEndpoints = {
   company(id: string) {
     return `${this.baseUrl}/${id}`;
   },
-  detail(id?: string, alias?: string) {
-    let url = `${this.baseUrl}/detail`;
+  details(id?: string, alias?: string) {
+    let url = `${this.baseUrl}/details`;
     if (id) {
       url += `?id=${id}`;
     } else if (alias) {
       url += `?alias=${alias}`;
     }
     return url;
+  },
+};
+
+export const dynamicsSettingsEndpoints = {
+  baseUrl: "dynamics-settings",
+  company(companyId: string) {
+    return `${this.baseUrl}/company/${companyId}`;
   },
 };
 
