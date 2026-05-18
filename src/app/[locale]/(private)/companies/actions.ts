@@ -1,7 +1,7 @@
 "use server";
 
 import { companyRepo } from "@/repositories/company";
-import { CompanyFormValues } from "./company-form-schema";
+import { CompanyFormValues } from "./_licenses/company-form-schema";
 import { isFailure } from "@/core/types/results";
 import { getTranslations } from "next-intl/server";
 import { companyEndpoints } from "@/core/constants/endpoints";
