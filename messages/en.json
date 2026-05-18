@@ -88,7 +88,7 @@
   "dynamicsClientSecret": "Client Secret",
   "dynamicsTenantId": "Tenant ID",
   "dynamicsResource": "Resource",
-  "dynamicsFormValidMessage": "Form is valid — save will be wired next.",
+  "dynamicsSettingSavedSuccessfully": "Dynamics settings saved successfully.",
   "dataTable": {
     "rowsSelectedSummary": "{selected} of {total} row(s) selected.",
     "rowsPerPage": "Rows per page",

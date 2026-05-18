@@ -47,7 +47,7 @@ export class CompanyImpl implements CompanyRepo {
     id?: string,
     alias?: string,
   ): Promise<Result<ResultType<Company>>> {
-    const endpoint = companyEndpoints.detail(id, alias);
+    const endpoint = companyEndpoints.details(id, alias);
     return callGet<ResultType<Company>>(endpoint, "force-cache", {
       tags: [endpoint],
     });

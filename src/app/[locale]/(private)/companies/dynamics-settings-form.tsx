@@ -16,9 +16,12 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { TanStackFormTextField } from "@/components/form";
+import { upsertDynamicsSettings } from "./dynamics-settings-actions";
 import { toast } from "sonner";
+import { useRouter } from "@/core/i18n/navigation";
 import { Spinner } from "@/components/ui/spinner";
 import { DynamicsSettings } from "@/repositories/dynamics-settings/types";
+import type { DynamicsSettingsFormValues } from "./dynamics-settings-form-schema";
 
 type Props = {
   companyId: number;
@@ -26,13 +29,12 @@ type Props = {
 };
 
 export function DynamicsSettingsForm({
-  companyId: _companyId,
+  companyId,
   dynamicsSettings,
 }: Props) {
   const t = useTranslations();
+  const router = useRouter();
   const hasExisting = dynamicsSettings?.id != null;
-
-  void _companyId;
 
   const form = useForm({
     defaultValues: {
@@ -46,8 +48,17 @@ export function DynamicsSettingsForm({
     validators: {
       onSubmit: createDynamicsSettingsFormSchema(t),
     },
-    onSubmit: async () => {
-      toast.success(t("dynamicsFormValidMessage"));
+    onSubmit: async ({ value }) => {
+      const result = await upsertDynamicsSettings(
+        companyId,
+        value as DynamicsSettingsFormValues,
+      );
+      if (result.success) {
+        toast.success(result.message);
+        // router.refresh();
+      } else {
+        toast.error(result.message);
+      }
     },
   });
 
