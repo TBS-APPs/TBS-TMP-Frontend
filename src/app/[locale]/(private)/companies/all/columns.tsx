@@ -4,7 +4,7 @@ import { useState } from "react";
 import { ColumnDef } from "@tanstack/react-table";
 import { Company } from "@/repositories/company";
 import { Button } from "@/components/ui/button";
-import { EditIcon, MoreHorizontal, TrashIcon } from "lucide-react";
+import { EditIcon, Eye, MoreHorizontal, TrashIcon } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -24,32 +24,42 @@ function CompanyRowActions({ company }: { company: Company }) {
   const router = useRouter();
   const [deleteOpen, setDeleteOpen] = useState(false);
 
+  const editHref = routes.companies.edit(company.id?.toString() ?? "");
+
   return (
     <>
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="ghost" className="h-8 w-8 p-0">
-            <MoreHorizontal className="h-4 w-4" />
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
-          <DropdownMenuLabel>{t("actions")}</DropdownMenuLabel>
-          <DropdownMenuItem
-            className="text-primary"
-            onClick={() => {
-              router.push(routes.companies.edit(company.id?.toString() ?? ""));
-            }}
-          >
-            <EditIcon /> {t("edit")}
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            className="text-destructive"
-            onClick={() => setDeleteOpen(true)}
-          >
-            <TrashIcon /> {t("delete")}
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
+      <div className="flex items-center gap-1">
+        <Button
+          variant="ghost"
+          className="h-8 w-8 p-0"
+          onClick={() => router.push(editHref)}
+          aria-label={t("edit")}
+        >
+          <Eye className="h-4 w-4" />
+        </Button>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" className="h-8 w-8 p-0">
+              <MoreHorizontal className="h-4 w-4" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuLabel>{t("actions")}</DropdownMenuLabel>
+            <DropdownMenuItem
+              className="text-primary"
+              onClick={() => router.push(editHref)}
+            >
+              <EditIcon /> {t("edit")}
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              className="text-destructive"
+              onClick={() => setDeleteOpen(true)}
+            >
+              <TrashIcon /> {t("delete")}
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
       <DeleteCompanyDialog
         id={company.id?.toString() ?? ""}
         open={deleteOpen}
