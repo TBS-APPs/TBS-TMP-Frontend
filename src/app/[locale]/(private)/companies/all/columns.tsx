@@ -4,7 +4,13 @@ import { useState } from "react";
 import { ColumnDef } from "@tanstack/react-table";
 import { Company } from "@/repositories/company";
 import { Button } from "@/components/ui/button";
-import { EditIcon, Eye, MoreHorizontal, TrashIcon } from "lucide-react";
+import {
+  EditIcon,
+  Eye,
+  MoreHorizontal,
+  QrCode,
+  TrashIcon,
+} from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,11 +24,13 @@ import { useRouter } from "@/core/i18n/navigation";
 import { routes } from "@/core/constants/routes";
 import { useTranslations } from "next-intl";
 import { DeleteCompanyDialog } from "./components/delete-alert";
+import { CompanyQrDialog } from "./components/company-qr-dialog";
 
 function CompanyRowActions({ company }: { company: Company }) {
   const t = useTranslations();
   const router = useRouter();
   const [deleteOpen, setDeleteOpen] = useState(false);
+  const [qrOpen, setQrOpen] = useState(false);
 
   const editHref = routes.companies.edit(company.id?.toString() ?? "");
 
@@ -51,6 +59,9 @@ function CompanyRowActions({ company }: { company: Company }) {
             >
               <EditIcon /> {t("edit")}
             </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => setQrOpen(true)}>
+              <QrCode /> {t("companyQrCode")}
+            </DropdownMenuItem>
             <DropdownMenuItem
               className="text-destructive"
               onClick={() => setDeleteOpen(true)}
@@ -60,6 +71,11 @@ function CompanyRowActions({ company }: { company: Company }) {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
+      <CompanyQrDialog
+        company={company}
+        open={qrOpen}
+        onOpenChange={setQrOpen}
+      />
       <DeleteCompanyDialog
         id={company.id?.toString() ?? ""}
         open={deleteOpen}
