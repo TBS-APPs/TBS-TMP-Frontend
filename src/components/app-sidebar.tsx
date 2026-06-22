@@ -53,6 +53,16 @@ export async function AppSidebar({ locale }: { locale: string }) {
         },
       ],
     },
+    {
+      label: t("mobileAppSettings"),
+      items: [
+        {
+          label: t("mobileAppSettings"),
+          href: routes.mobileAppSettings.all,
+          icon: "eye",
+        },
+      ],
+    },
   ];
 
   const direction = getLangDir(locale);

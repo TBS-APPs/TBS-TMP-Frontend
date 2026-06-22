@@ -18,4 +18,7 @@ export const routes = {
     add: "/modules/add",
     edit: (id: string) => `/modules/edit/${id}`,
   },
+  mobileAppSettings: {
+    all: "/mobile-app-settings/all",
+  },
 } as const;
