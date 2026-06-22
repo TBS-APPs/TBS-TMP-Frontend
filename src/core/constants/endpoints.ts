@@ -33,6 +33,18 @@ export const licenseEndpoints = {
 
 export const moduleEndpoint = "module";
 
+export const mobileAppSettingsEndpoint = "mobile-app-settings";
+
+export const mobileAppSettingsEndpoints = {
+  baseUrl: mobileAppSettingsEndpoint,
+  byId(id: string) {
+    return `${this.baseUrl}/${id}`;
+  },
+  byPlatform(platform: string) {
+    return `${this.baseUrl}/platform/${platform}`;
+  },
+};
+
 export const authEndpoints = {
   prefix: "auth",
   get login() {
