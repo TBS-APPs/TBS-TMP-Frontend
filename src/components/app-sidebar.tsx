@@ -54,11 +54,16 @@ export async function AppSidebar({ locale }: { locale: string }) {
       ],
     },
     {
-      label: t("mobileAppSettings"),
+      label: t("mobileApp"),
       items: [
         {
           label: t("mobileAppSettings"),
           href: routes.mobileAppSettings.all,
+          icon: "eye",
+        },
+        {
+          label: t("mobileAppTranslations"),
+          href: routes.mobileAppTranslations.all,
           icon: "eye",
         },
       ],

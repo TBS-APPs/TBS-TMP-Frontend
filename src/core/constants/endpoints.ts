@@ -45,6 +45,20 @@ export const mobileAppSettingsEndpoints = {
   },
 };
 
+export const mobileAppTranslationsEndpoint = "mobile-app-translations";
+
+export const mobileAppTranslationsEndpoints = {
+  baseUrl: mobileAppTranslationsEndpoint,
+  keys: `${mobileAppTranslationsEndpoint}/keys`,
+  key(id: string) {
+    return `${mobileAppTranslationsEndpoint}/keys/${id}`;
+  },
+  translations: `${mobileAppTranslationsEndpoint}/translations`,
+  translation(id: string) {
+    return `${mobileAppTranslationsEndpoint}/translations/${id}`;
+  },
+};
+
 export const authEndpoints = {
   prefix: "auth",
   get login() {
