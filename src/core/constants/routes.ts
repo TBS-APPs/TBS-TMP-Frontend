@@ -21,4 +21,7 @@ export const routes = {
   mobileAppSettings: {
     all: "/mobile-app-settings/all",
   },
+  mobileAppTranslations: {
+    all: "/mobile-app-translations/all",
+  },
 } as const;
