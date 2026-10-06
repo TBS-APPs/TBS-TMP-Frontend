@@ -37,6 +37,7 @@ function segmentLabel(
   if (segment === "companies") return t("companies");
   if (segment === "modules") return t("modules");
   if (segment === "mobile-app-settings") return t("mobileAppSettings");
+  if (segment === "mobile-app-translations") return t("mobileAppTranslations");
   if (segment === "account") return t("account");
   if (segment === "add" && prev === "companies") return t("addCompany");
   if (segment === "edit" && prev === "companies") return t("editCompany");
