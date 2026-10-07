@@ -45,6 +45,15 @@ export const mobileAppSettingsEndpoints = {
   },
 };
 
+export const mobileAppThemesEndpoint = "mobile-app-themes";
+
+export const mobileAppThemesEndpoints = {
+  baseUrl: mobileAppThemesEndpoint,
+  byId(id: string) {
+    return `${this.baseUrl}/${id}`;
+  },
+};
+
 export const mobileAppTranslationsEndpoint = "mobile-app-translations";
 
 export const mobileAppTranslationsEndpoints = {
