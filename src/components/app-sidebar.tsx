@@ -66,6 +66,11 @@ export async function AppSidebar({ locale }: { locale: string }) {
           href: routes.mobileAppTranslations.all,
           icon: "eye",
         },
+        {
+          label: t("mobileAppThemes"),
+          href: routes.mobileAppThemes.all,
+          icon: "eye",
+        },
       ],
     },
   ];
