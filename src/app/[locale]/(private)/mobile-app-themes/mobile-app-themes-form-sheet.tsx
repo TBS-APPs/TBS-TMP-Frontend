@@ -29,6 +29,7 @@ import { toast } from "sonner";
 import { useRouter } from "@/core/i18n/navigation";
 import { Spinner } from "@/components/ui/spinner";
 import { MobileAppThemePalette } from "@/repositories/mobile-app-themes";
+import { translationsToNameFields } from "@/core/utils/entity-translation";
 
 type Props = {
   palette?: MobileAppThemePalette;
@@ -39,9 +40,11 @@ type Props = {
 function getDefaultValues(
   palette?: MobileAppThemePalette,
 ): MobileAppThemesFormValues {
+  const nameFields = translationsToNameFields(palette?.translations);
   return {
     code: palette?.code ?? "",
-    name: palette?.name ?? "",
+    nameEn: nameFields.nameEn,
+    nameAr: nameFields.nameAr,
     isDefault: palette?.isDefault ?? false,
     isActive: palette?.isActive ?? true,
     sortOrder: palette?.sortOrder?.toString() ?? "0",
@@ -138,8 +141,15 @@ export function MobileAppThemesFormSheet({
             />
             <TanStackFormTextField
               form={form}
-              name="name"
-              label={t("themeName")}
+              name="nameEn"
+              label={t("nameEn")}
+              placeholder={t("themeNamePlaceholder")}
+              autoComplete="off"
+            />
+            <TanStackFormTextField
+              form={form}
+              name="nameAr"
+              label={t("nameAr")}
               placeholder={t("themeNamePlaceholder")}
               autoComplete="off"
             />

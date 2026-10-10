@@ -45,7 +45,8 @@ function isPublicAuthPath(restPath: string): boolean {
   );
 }
 
-export function proxy(request: NextRequest) {
+/** Use middleware.ts (not proxy.ts): Next 16.2.x + Turbopack 404s nested routes with proxy.ts in next dev. */
+export function middleware(request: NextRequest) {
   const hasAuth = Boolean(request.cookies.get(ACCESS_TOKEN_COOKIE)?.value);
 
   const { locale, restPath } = getLocaleAndRestPath(request.nextUrl.pathname);

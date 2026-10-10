@@ -5,10 +5,17 @@ import {
   MobileAppThemePaletteUpdatePayload,
 } from "./types";
 
+export type TranslationIncludeOptions = {
+  include?: string;
+};
+
 export interface MobileAppThemesRepo {
-  getThemePalettes(): Promise<Result<ResultType<MobileAppThemePalette[]>>>;
+  getThemePalettes(
+    options?: TranslationIncludeOptions,
+  ): Promise<Result<ResultType<MobileAppThemePalette[]>>>;
   getThemePalette(
     id: string,
+    options?: TranslationIncludeOptions,
   ): Promise<Result<ResultType<MobileAppThemePalette>>>;
   addThemePalette(
     payload: MobileAppThemePaletteCreatePayload,

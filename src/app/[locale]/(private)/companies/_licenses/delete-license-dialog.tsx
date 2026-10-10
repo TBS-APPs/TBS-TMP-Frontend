@@ -24,7 +24,7 @@ export function DeleteLicenseDialog({
   onOpenChange,
   onDeleted,
 }: {
-  companyId: number;
+  companyId: string;
   licenseId: string;
   open: boolean;
   onOpenChange: (open: boolean) => void;

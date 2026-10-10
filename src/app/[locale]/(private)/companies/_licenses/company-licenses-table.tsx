@@ -8,7 +8,7 @@ import { createCompanyLicenseColumns } from "./company-licenses-columns";
 
 type Props = {
   data: License[];
-  companyId: number;
+  companyId: string;
   onEdit: (license: License) => void;
 };
 

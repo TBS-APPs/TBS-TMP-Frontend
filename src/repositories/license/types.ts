@@ -1,7 +1,7 @@
 import { Module } from "@/repositories/module/types";
 
 export interface License {
-  id: number;
+  id: string;
   seatsLimit: number;
   startDate: string;
   expirationDate: string;
@@ -12,5 +12,5 @@ export type LicenseByCompanyPayload = {
   seatsLimit: number;
   startDate: string;
   expirationDate: string;
-  moduleId: number;
+  moduleId: string;
 };

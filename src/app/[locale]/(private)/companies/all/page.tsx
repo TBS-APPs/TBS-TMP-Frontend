@@ -3,7 +3,9 @@ import { companyRepo } from "@/repositories/company";
 import { AllCompaniesTable } from "./all-companies-table";
 
 export default async function AllCompaniesPage() {
-  const companiesResult = await companyRepo.getCompanies();
+  const companiesResult = await companyRepo.getCompanies({
+    include: "translations",
+  });
   if (isFailure(companiesResult)) {
     return <div>Error: {companiesResult.failure.message}</div>;
   }

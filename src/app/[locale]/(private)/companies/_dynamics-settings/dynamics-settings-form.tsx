@@ -24,7 +24,7 @@ import { DynamicsSettings } from "@/repositories/dynamics-settings/types";
 import type { DynamicsSettingsFormValues } from "./dynamics-settings-form-schema";
 
 type Props = {
-  companyId: number;
+  companyId: string;
   dynamicsSettings?: DynamicsSettings;
 };
 

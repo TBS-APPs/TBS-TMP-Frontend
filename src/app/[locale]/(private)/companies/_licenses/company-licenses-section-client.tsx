@@ -16,7 +16,7 @@ import { CompanyLicensesTable } from "./company-licenses-table";
 import { LicenseFormSheet } from "./license-form-sheet";
 
 type Props = {
-  companyId: number;
+  companyId: string;
   licenses: License[];
   moduleOptions: SelectOption[];
 };

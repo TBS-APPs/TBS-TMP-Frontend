@@ -7,14 +7,15 @@ import { getTranslations } from "next-intl/server";
 import { companyEndpoints } from "@/core/constants/endpoints";
 import { updateTag } from "next/cache";
 import { AddActionResult } from "@/core/types/add-action-result";
+import { nameFieldsToTranslations } from "@/core/utils/entity-translation";
 
 export async function addCompany(
   values: CompanyFormValues,
 ): Promise<AddActionResult<unknown>> {
   const t = await getTranslations();
   const result = await companyRepo.addCompany({
-    name: values.name,
     alias: values.alias,
+    translations: nameFieldsToTranslations(values),
   });
 
   if (isFailure(result)) {
@@ -34,8 +35,8 @@ export async function updateCompany(
 ): Promise<AddActionResult<unknown>> {
   const t = await getTranslations();
   const result = await companyRepo.updateCompany(id, {
-    name: values.name,
     alias: values.alias,
+    translations: nameFieldsToTranslations(values),
   });
 
   if (isFailure(result)) {

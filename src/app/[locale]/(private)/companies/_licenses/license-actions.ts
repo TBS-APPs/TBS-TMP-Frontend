@@ -17,23 +17,20 @@ function toPayload(values: LicenseFormValues) {
     seatsLimit: Number(values.seatsLimit),
     startDate: toIsoDatetime(values.startDate),
     expirationDate: toIsoDatetime(values.expirationDate),
-    moduleId: Number(values.moduleId),
+    moduleId: values.moduleId,
   };
 }
 
-function invalidateCompanyDetail(companyId: number) {
-  updateTag(companyEndpoints.details(String(companyId)));
+function invalidateCompanyDetail(companyId: string) {
+  updateTag(companyEndpoints.details(companyId));
 }
 
 export async function addLicense(
-  companyId: number,
+  companyId: string,
   values: LicenseFormValues,
 ): Promise<AddActionResult<unknown>> {
   const t = await getTranslations();
-  const result = await licenseRepo.createByCompanyId(
-    String(companyId),
-    toPayload(values),
-  );
+  const result = await licenseRepo.createByCompanyId(companyId, toPayload(values));
 
   if (isFailure(result)) {
     return { success: false, message: result.failure.message };
@@ -48,13 +45,13 @@ export async function addLicense(
 }
 
 export async function updateLicense(
-  companyId: number,
+  companyId: string,
   licenseId: string,
   values: LicenseFormValues,
 ): Promise<AddActionResult<unknown>> {
   const t = await getTranslations();
   const result = await licenseRepo.updateByCompanyId(
-    String(companyId),
+    companyId,
     licenseId,
     toPayload(values),
   );
@@ -72,14 +69,11 @@ export async function updateLicense(
 }
 
 export async function deleteLicense(
-  companyId: number,
+  companyId: string,
   licenseId: string,
 ): Promise<DeleteActionResult<unknown>> {
   const t = await getTranslations();
-  const result = await licenseRepo.deleteByCompanyId(
-    String(companyId),
-    licenseId,
-  );
+  const result = await licenseRepo.deleteByCompanyId(companyId, licenseId);
 
   if (isFailure(result)) {
     return { success: false, message: result.failure.message };

@@ -51,7 +51,11 @@ export function CompanyQrDialog({
 
     setIsSharing(true);
     try {
-      const result = await shareQrImage(svg, fileName, company.name);
+      const result = await shareQrImage(
+        svg,
+        fileName,
+        company.name ?? company.alias,
+      );
       if (result === "shared") {
         toast.success(t("qrShared"));
       } else if (result === "downloaded") {
@@ -70,7 +74,9 @@ export function CompanyQrDialog({
         <DialogHeader>
           <DialogTitle>{t("companyQrCode")}</DialogTitle>
           <DialogDescription>
-            {t("companyQrCodeDescription", { name: company.name })}
+            {t("companyQrCodeDescription", {
+              name: company.name ?? company.alias,
+            })}
           </DialogDescription>
         </DialogHeader>
 

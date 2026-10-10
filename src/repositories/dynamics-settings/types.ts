@@ -1,5 +1,5 @@
 export interface DynamicsSettings {
-  id?: number;
+  id?: string;
   baseUrl: string;
   tokenUrl: string;
   clientId: string;

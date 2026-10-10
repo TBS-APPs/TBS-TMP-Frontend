@@ -17,7 +17,9 @@ export default async function EditCompanyPage({ params }: Props) {
   if(!id) {
     redirect({ href: routes.companies.all, locale: locale });
   }
-  const companyResult = await companyRepo.getCompanyDetail(id);
+  const companyResult = await companyRepo.getCompanyDetail(id, undefined, {
+    include: "translations",
+  });
   if (isFailure(companyResult)) {
     return <div>Error: {companyResult.failure.message}</div>;
   }

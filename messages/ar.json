@@ -40,6 +40,8 @@
   "editCompany": "تعديل الشركة",
   "editCompanyDescription": "تعديل تفاصيل الشركة.",
   "companyName": "اسم الشركة",
+  "nameEn": "الاسم (الإنجليزية)",
+  "nameAr": "الاسم (العربية)",
   "companyAlias": "الاسم المختصر",
   "companyNameMinLength": "يجب أن يكون اسم الشركة 3 أحرف على الأقل.",
   "companyAliasMinLength": "يجب أن يكون الاسم المختصر حرفين على الأقل.",

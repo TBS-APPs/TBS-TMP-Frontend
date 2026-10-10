@@ -9,7 +9,8 @@ export function createMobileAppThemesFormSchema(t: (key: string) => string) {
       .string()
       .min(1, t("fieldRequired"))
       .regex(themeCodeRegex, t("invalidThemeCode")),
-    name: z.string().min(1, t("fieldRequired")),
+    nameEn: z.string().min(1, t("fieldRequired")),
+    nameAr: z.string().min(1, t("fieldRequired")),
     isDefault: z.boolean(),
     isActive: z.boolean(),
     sortOrder: z

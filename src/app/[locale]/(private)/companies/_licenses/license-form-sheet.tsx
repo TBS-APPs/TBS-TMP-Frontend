@@ -27,7 +27,7 @@ import { Spinner } from "@/components/ui/spinner";
 import { License } from "@/repositories/license/types";
 
 type Props = {
-  companyId: number;
+  companyId: string;
   moduleOptions: SelectOption[];
   license?: License;
   open: boolean;

@@ -4,7 +4,7 @@ export interface AuthResponse {
 }
 
 export interface User {
-  id: number;
+  id: string;
   email: string;
   name: string;
   status: UserStatus;

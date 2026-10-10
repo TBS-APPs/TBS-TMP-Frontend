@@ -23,6 +23,7 @@ import { Spinner } from "@/components/ui/spinner";
 import { Company } from "@/repositories/company";
 import { TrashIcon } from "lucide-react";
 import { DeleteCompanyDialog } from "../all/components/delete-alert";
+import { translationsToNameFields } from "@/core/utils/entity-translation";
 
 type Props = {
   company?: Company;
@@ -33,9 +34,11 @@ export function CompanyForm({ company }: Props) {
   const router = useRouter();
   const isEditing = company != null && company !== undefined;
   const [deleteOpen, setDeleteOpen] = useState(false);
+  const nameFields = translationsToNameFields(company?.translations);
   const form = useForm({
     defaultValues: {
-      name: company?.name ?? "",
+      nameEn: nameFields.nameEn,
+      nameAr: nameFields.nameAr,
       alias: company?.alias ?? "",
     },
     validators: {
@@ -102,9 +105,16 @@ export function CompanyForm({ company }: Props) {
           <FieldGroup>
             <TanStackFormTextField
               form={form}
-              name="name"
-              label={t("companyName")}
-              placeholder={t("companyName")}
+              name="nameEn"
+              label={t("nameEn")}
+              placeholder={t("nameEn")}
+              autoComplete="organization"
+            />
+            <TanStackFormTextField
+              form={form}
+              name="nameAr"
+              label={t("nameAr")}
+              placeholder={t("nameAr")}
               autoComplete="organization"
             />
             <TanStackFormTextField

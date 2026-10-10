@@ -3,7 +3,9 @@ import { moduleRepo } from "@/repositories/module";
 import { AllModulesTable } from "./all-modules-table";
 
 export default async function AllModulesPage() {
-  const modulesResult = await moduleRepo.getModules();
+  const modulesResult = await moduleRepo.getModules({
+    include: "translations",
+  });
   if (isFailure(modulesResult)) {
     return <div>Error: {modulesResult.failure.message}</div>;
   }

@@ -8,7 +8,9 @@ type Props = {
 
 export default async function EditModulePage({ params }: Props) {
   const { id } = await params;
-  const moduleResult = await moduleRepo.getModule(id);
+  const moduleResult = await moduleRepo.getModule(id, {
+    include: "translations",
+  });
   if (isFailure(moduleResult)) {
     return <div>Error: {moduleResult.failure.message}</div>;
   }
