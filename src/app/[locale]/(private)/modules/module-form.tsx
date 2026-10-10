@@ -2,7 +2,10 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { createModuleFormSchema } from "./module-form-schema";
+import {
+  createModuleFormSchema,
+  type ModuleFormValues,
+} from "./module-form-schema";
 import { useForm } from "@tanstack/react-form";
 import { Field, FieldGroup } from "@/components/ui/field";
 import { Button } from "@/components/ui/button";
@@ -23,10 +26,7 @@ import { Spinner } from "@/components/ui/spinner";
 import { Module } from "@/repositories/module";
 import { TrashIcon } from "lucide-react";
 import { DeleteModuleDialog } from "./all/components/delete-alert";
-
-type ModuleFormValues = {
-  name: string;
-};
+import { translationsToNameFields } from "@/core/utils/entity-translation";
 
 type Props = {
   module?: Module;
@@ -37,16 +37,23 @@ export function ModuleForm({ module }: Props) {
   const router = useRouter();
   const idEditing = module != null && module != undefined;
   const [deleteOpen, setDeleteOpen] = useState(false);
+  const nameFields = translationsToNameFields(module?.translations);
   const form = useForm({
     defaultValues: {
-      name: module?.name ?? "",
+      nameEn: nameFields.nameEn,
+      nameAr: nameFields.nameAr,
     },
     validators: {
       onSubmit: createModuleFormSchema(t),
     },
 
     onSubmit: async ({ value }) => {
-      const result = idEditing ? await updateModule(module?.id?.toString() ?? "", value as ModuleFormValues) : await addModule(value as ModuleFormValues);
+      const result = idEditing
+        ? await updateModule(
+            module?.id?.toString() ?? "",
+            value as ModuleFormValues,
+          )
+        : await addModule(value as ModuleFormValues);
       if (result.success) {
         router.push(routes.modules.all);
         toast.success(result.message);
@@ -99,9 +106,16 @@ export function ModuleForm({ module }: Props) {
           <FieldGroup>
             <TanStackFormTextField
               form={form}
-              name="name"
-              label={t("moduleName")}
-              placeholder={t("moduleName")}
+              name="nameEn"
+              label={t("nameEn")}
+              placeholder={t("nameEn")}
+              autoComplete="off"
+            />
+            <TanStackFormTextField
+              form={form}
+              name="nameAr"
+              label={t("nameAr")}
+              placeholder={t("nameAr")}
               autoComplete="off"
             />
           </FieldGroup>

@@ -5,7 +5,7 @@ import type { SelectOption } from "@/components/form";
 import { CompanyLicensesSectionClient } from "./company-licenses-section-client";
 
 type Props = {
-  companyId: number;
+  companyId: string;
   licenses?: License[];
 };
 
@@ -18,7 +18,7 @@ export async function CompanyLicensesSection({ companyId, licenses }: Props) {
   const moduleOptions: SelectOption[] = (modulesResult.data?.data ?? []).map(
     (module) => ({
       value: String(module.id),
-      label: module.name,
+      label: module.name ?? "—",
     }),
   );
 

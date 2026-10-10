@@ -25,6 +25,7 @@ import { routes } from "@/core/constants/routes";
 import { useTranslations } from "next-intl";
 import { DeleteCompanyDialog } from "./components/delete-alert";
 import { CompanyQrDialog } from "./components/company-qr-dialog";
+import { translationsToNameFields } from "@/core/utils/entity-translation";
 
 function CompanyRowActions({ company }: { company: Company }) {
   const t = useTranslations();
@@ -122,11 +123,24 @@ export function createCompanyColumns(
       ),
     },
     {
-      accessorKey: "name",
-      meta: { columnLabel: t("name") },
+      id: "nameEn",
+      accessorFn: (row) => translationsToNameFields(row.translations).nameEn,
+      meta: { columnLabel: t("nameEn") },
       header: ({ column }) => (
-        <DataTableColumnHeader column={column} title={t("name")} />
+        <DataTableColumnHeader column={column} title={t("nameEn")} />
       ),
+      cell: ({ row }) =>
+        translationsToNameFields(row.original.translations).nameEn || "—",
+    },
+    {
+      id: "nameAr",
+      accessorFn: (row) => translationsToNameFields(row.translations).nameAr,
+      meta: { columnLabel: t("nameAr") },
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title={t("nameAr")} />
+      ),
+      cell: ({ row }) =>
+        translationsToNameFields(row.original.translations).nameAr || "—",
     },
     {
       accessorKey: "alias",

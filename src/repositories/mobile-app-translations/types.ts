@@ -1,12 +1,12 @@
 export interface MobileAppTranslationKey {
-  id: number;
+  id: string;
   key: string;
   description?: string | null;
   metadata?: Record<string, unknown> | null;
 }
 
 export interface MobileAppTranslationLocale {
-  id: number;
+  id: string;
   code: string;
   name: string;
   isDefault: boolean;
@@ -14,7 +14,7 @@ export interface MobileAppTranslationLocale {
 }
 
 export interface MobileAppTranslation {
-  id: number;
+  id: string;
   value: string;
   translationKey: MobileAppTranslationKey;
   locale: MobileAppTranslationLocale;
@@ -38,7 +38,7 @@ export type UpsertMobileAppTranslationPayload = {
 };
 
 export type TranslationRow = {
-  keyId: number;
+  keyId: string;
   key: string;
   description?: string | null;
   metadata?: Record<string, unknown> | null;
@@ -50,7 +50,7 @@ export function mergeTranslationRows(
   keys: MobileAppTranslationKey[],
   translations: MobileAppTranslation[],
 ): TranslationRow[] {
-  const valuesByKeyId = new Map<number, { en: string; ar: string }>();
+  const valuesByKeyId = new Map<string, { en: string; ar: string }>();
 
   for (const translation of translations) {
     const keyId = translation.translationKey?.id;

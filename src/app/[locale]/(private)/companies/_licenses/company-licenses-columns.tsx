@@ -23,7 +23,7 @@ function formatDate(value: string) {
 }
 
 type ColumnOptions = {
-  companyId: number;
+  companyId: string;
   onEdit: (license: License) => void;
 };
 
@@ -33,7 +33,7 @@ function LicenseRowActions({
   onEdit,
 }: {
   license: License;
-  companyId: number;
+  companyId: string;
   onEdit: (license: License) => void;
 }) {
   const t = useTranslations();

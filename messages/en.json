@@ -40,6 +40,8 @@
   "editCompany": "Edit Company",
   "editCompanyDescription": "Edit the company details.",
   "companyName": "Company name",
+  "nameEn": "Name (English)",
+  "nameAr": "Name (Arabic)",
   "companyAlias": "Alias",
   "companyNameMinLength": "Company name must be at least 3 characters.",
   "companyAliasMinLength": "Alias must be at least 2 characters.",

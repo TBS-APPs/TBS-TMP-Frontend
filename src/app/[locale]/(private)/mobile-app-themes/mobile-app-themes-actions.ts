@@ -14,19 +14,20 @@ import {
   AddActionResult,
   DeleteActionResult,
 } from "@/core/types/add-action-result";
+import { nameFieldsToTranslations } from "@/core/utils/entity-translation";
 
 function toCreatePayload(
   values: MobileAppThemesFormValues,
 ): MobileAppThemePaletteCreatePayload {
   return {
     code: values.code.trim(),
-    name: values.name.trim(),
     isDefault: values.isDefault,
     isActive: values.isActive,
     sortOrder: Number(values.sortOrder),
     primary: values.primary.trim(),
     secondary: values.secondary.trim(),
     tertiary: values.tertiary.trim(),
+    translations: nameFieldsToTranslations(values),
   };
 }
 

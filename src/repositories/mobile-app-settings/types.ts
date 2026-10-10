@@ -1,7 +1,7 @@
 export type MobileAppPlatform = "android" | "ios";
 
 export interface MobileAppSetting {
-  id?: number;
+  id?: string;
   platform: MobileAppPlatform;
   minimumVersion: string;
   recommendedVersion: string;

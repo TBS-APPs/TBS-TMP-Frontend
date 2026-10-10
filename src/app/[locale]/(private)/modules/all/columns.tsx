@@ -18,6 +18,7 @@ import { useRouter } from "@/core/i18n/navigation";
 import { routes } from "@/core/constants/routes";
 import { useTranslations } from "next-intl";
 import { DeleteModuleDialog } from "./components/delete-alert";
+import { translationsToNameFields } from "@/core/utils/entity-translation";
 
 function ModuleRowActions({ module }: { module: Module }) {
   const t = useTranslations();
@@ -96,11 +97,24 @@ export function createModuleColumns(
       ),
     },
     {
-      accessorKey: "name",
-      meta: { columnLabel: t("name") },
+      id: "nameEn",
+      accessorFn: (row) => translationsToNameFields(row.translations).nameEn,
+      meta: { columnLabel: t("nameEn") },
       header: ({ column }) => (
-        <DataTableColumnHeader column={column} title={t("name")} />
+        <DataTableColumnHeader column={column} title={t("nameEn")} />
       ),
+      cell: ({ row }) =>
+        translationsToNameFields(row.original.translations).nameEn || "—",
+    },
+    {
+      id: "nameAr",
+      accessorFn: (row) => translationsToNameFields(row.translations).nameAr,
+      meta: { columnLabel: t("nameAr") },
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title={t("nameAr")} />
+      ),
+      cell: ({ row }) =>
+        translationsToNameFields(row.original.translations).nameAr || "—",
     },
     {
       id: "actions",

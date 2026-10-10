@@ -12,7 +12,7 @@ import { updateTag } from "next/cache";
 import { AddActionResult } from "@/core/types/add-action-result";
 
 export async function upsertDynamicsSettings(
-  companyId: number,
+  companyId: string,
   values: DynamicsSettingsFormValues,
 ): Promise<AddActionResult<unknown>> {
   const t = await getTranslations();
@@ -26,7 +26,7 @@ export async function upsertDynamicsSettings(
   };
 
   const result = await dynamicsSettingsRepo.upsertByCompanyId(
-    String(companyId),
+    companyId,
     payload,
   );
 
@@ -34,9 +34,8 @@ export async function upsertDynamicsSettings(
     return { success: false, message: result.failure.message };
   }
 
-  const companyIdStr = String(companyId);
-  updateTag(companyEndpoints.details(companyIdStr));
-  updateTag(dynamicsSettingsEndpoints.company(companyIdStr));
+  updateTag(companyEndpoints.details(companyId));
+  updateTag(dynamicsSettingsEndpoints.company(companyId));
 
   return {
     success: true,

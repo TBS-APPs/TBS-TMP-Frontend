@@ -1,5 +1,5 @@
 import { Result, ResultType } from "@/core/types/results";
-import { Module, ModuleRepo } from ".";
+import { Module, ModuleRepo, ModuleWritePayload } from ".";
 import { moduleEndpoint } from "@/core/constants/endpoints";
 import {
   callDelete,
@@ -7,31 +7,48 @@ import {
   callPatch,
   callPost,
 } from "@/core/services/api-services";
+import { withInclude } from "@/core/utils/entity-translation";
+import { getLocale } from "next-intl/server";
+import { TranslationIncludeOptions } from "./module-repo";
 
 export class ModuleImpl implements ModuleRepo {
-  getModules(): Promise<Result<ResultType<Module[]>>> {
-    const endpoint = moduleEndpoint;
+  async getModules(
+    options?: TranslationIncludeOptions,
+  ): Promise<Result<ResultType<Module[]>>> {
+    const endpoint = withInclude(moduleEndpoint, options?.include);
+    const locale = await getLocale();
     return callGet<ResultType<Module[]>>(endpoint, "force-cache", {
-      tags: [endpoint],
+      tags: [moduleEndpoint, `${endpoint}:${locale}`],
     });
   }
-  getModule(id: string): Promise<Result<ResultType<Module>>> {
-    const endpoint = `${moduleEndpoint}/${id}`;
+
+  async getModule(
+    id: string,
+    options?: TranslationIncludeOptions,
+  ): Promise<Result<ResultType<Module>>> {
+    const base = `${moduleEndpoint}/${id}`;
+    const endpoint = withInclude(base, options?.include);
+    const locale = await getLocale();
     return callGet<ResultType<Module>>(endpoint, "force-cache", {
-      tags: [endpoint],
+      tags: [base, `${endpoint}:${locale}`],
     });
   }
-  addModule(module: Module): Promise<Result<ResultType<void>>> {
+
+  addModule(module: ModuleWritePayload): Promise<Result<ResultType<void>>> {
     const endpoint = moduleEndpoint;
     return callPost<ResultType<void>>(endpoint, JSON.stringify(module));
   }
-  updateModule(id: string, module: Module): Promise<Result<ResultType<void>>> {
+
+  updateModule(
+    id: string,
+    module: ModuleWritePayload,
+  ): Promise<Result<ResultType<void>>> {
     const endpoint = `${moduleEndpoint}/${id}`;
     return callPatch<ResultType<void>>(endpoint, JSON.stringify(module));
   }
+
   deleteModule(id: string): Promise<Result<ResultType<void>>> {
     const endpoint = `${moduleEndpoint}/${id}`;
-    console.log(endpoint);
     return callDelete<ResultType<void>>(endpoint);
   }
 }

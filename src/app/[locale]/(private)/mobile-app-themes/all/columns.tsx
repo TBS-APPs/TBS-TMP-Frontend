@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { DataTableColumnHeader } from "@/components/data-table/data-table-column-header";
 import { DeleteThemePaletteDialog } from "./components/delete-dialog";
+import { translationsToNameFields } from "@/core/utils/entity-translation";
 
 function ColorSwatches({
   primary,
@@ -95,11 +96,24 @@ export function createMobileAppThemesColumns(
       ),
     },
     {
-      accessorKey: "name",
-      meta: { columnLabel: t("themeName") },
+      id: "nameEn",
+      accessorFn: (row) => translationsToNameFields(row.translations).nameEn,
+      meta: { columnLabel: t("nameEn") },
       header: ({ column }) => (
-        <DataTableColumnHeader column={column} title={t("themeName")} />
+        <DataTableColumnHeader column={column} title={t("nameEn")} />
       ),
+      cell: ({ row }) =>
+        translationsToNameFields(row.original.translations).nameEn || "—",
+    },
+    {
+      id: "nameAr",
+      accessorFn: (row) => translationsToNameFields(row.translations).nameAr,
+      meta: { columnLabel: t("nameAr") },
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title={t("nameAr")} />
+      ),
+      cell: ({ row }) =>
+        translationsToNameFields(row.original.translations).nameAr || "—",
     },
     {
       id: "colors",
