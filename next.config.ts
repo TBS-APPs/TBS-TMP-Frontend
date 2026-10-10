@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
   experimental: {
     agentUpgrade: "latest",
   },
+  output: "standalone",
 };
 
 const withNextIntl = createNextIntlPlugin("./src/core/i18n/request.ts");
